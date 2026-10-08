@@ -5,7 +5,7 @@ Sitio estático (HTML + CSS + JS, sin build). Se publica en Vercel tal cual est�
 ## ⚠️ Antes de publicar: configurar WhatsApp
 
 Los dos botones de reserva apuntan a números de ejemplo. Editar las dos
-constantes del principio de `assets/js/main.js`:
+constantes del principio de `assets/js/app.js`:
 
 ```js
 const SEDES = {
@@ -22,8 +22,8 @@ mensaje ya escrito según desde dónde se tocó.
 
 ```
 index.html                    todo el contenido
-assets/css/style.css          sistema visual completo
-assets/js/main.js             config + disciplinas + horarios + interacciones
+assets/css/app.css            sistema visual completo
+assets/js/app.js              config + disciplinas + horarios + interacciones
 assets/img/                   fotos reales del estudio (webp) + mapas + favicon
 assets/fonts/                 Bodoni Moda y Jost (subset, solo los glifos usados)
 vercel.json                   cache de assets y URLs limpias
@@ -33,11 +33,11 @@ vercel.json                   cache de assets y URLs limpias
 
 | Qué | Dónde |
 |---|---|
-| Números de WhatsApp | `main.js` → `SEDES` |
-| Disciplinas del selector | `main.js` → `FACETAS` |
-| Grillas de horarios | `main.js` → `HORARIOS` |
+| Números de WhatsApp | `app.js` → `SEDES` |
+| Disciplinas del selector | `app.js` → `FACETAS` |
+| Grillas de horarios | `app.js` → `HORARIOS` |
 | Textos, servicios de spa, FAQ, sedes | `index.html` |
-| Colores y tipografía | `style.css` → `:root` |
+| Colores y tipografía | `app.css` → `:root` |
 
 Las grillas de horarios se arman solas desde `HORARIOS`: cada celda es
 `G('Nombre', 'Nivel')`, o `G('Nombre', 'Nivel', 1)` si es prenatal (se pinta en
@@ -77,8 +77,10 @@ círculo de la flecha, el ícono prenatal. Nunca como fondo de sección.
 - **imágenes** → un día, con revalidación en segundo plano.
 - **CSS y JS** → siempre revalidar, porque los nombres no llevan hash.
 
-Si alguna vez cambiás `style.css` o `main.js` y no ves el cambio publicado,
-subile el número de versión en el `?v=` de `index.html`.
+Ojo con un detalle del CDN de Vercel: cachea por **ruta** e ignora el query
+string, así que `?v=2` no sirve para invalidar. Si alguna vez quedara un asset
+pegado, hay que **renombrar el archivo**. Con los headers actuales no debería
+volver a pasar.
 
 ## Notas
 

@@ -277,9 +277,14 @@ function montarApariciones () {
       e.target.classList.add('is-in');
       obs.unobserve(e.target);
     });
-  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
 
-  objetivos.forEach(el => obs.observe(el));
+  objetivos.forEach(el => {
+    // Si ya quedó por encima del viewport (llegada por ancla, recarga a media
+    // página), se muestra sin animar: nunca debe quedar contenido invisible.
+    if (el.getBoundingClientRect().bottom < 0) { el.classList.add('is-in'); return; }
+    obs.observe(el);
+  });
 }
 
 
