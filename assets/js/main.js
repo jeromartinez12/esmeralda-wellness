@@ -6,13 +6,14 @@
    sin "+", sin espacios y sin guiones.  Ej.: 5491123456789
 ============================================================================= */
 const SEDES = {
-  madero: { nombre: 'Puerto Madero',      whatsapp: '5491100000000' },
+  madero: { nombre: 'Puerto Madero',       whatsapp: '5491100000000' },
   leloir: { nombre: 'Thays Parque Leloir', whatsapp: '5491100000000' }
 };
 /* ========================================================================== */
 
 const $  = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+const calma = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 
 /* ----------------------------------------------------------- disciplinas -- */
@@ -22,46 +23,46 @@ const FACETAS = [
     id: 'reformer',
     nombre: 'Pilates Reformer',
     dur: '50 MIN',
-    img: 'assets/img/pilates-practica.webp',
-    alt: 'Práctica de pilates reformer frente a los ventanales',
-    copy: 'Para cuando buscás trabajar en profundidad, sumar resistencia y sentir el cuerpo más fuerte. Resistencia graduable, control milimétrico y corrección permanente.',
-    sede: 'PUERTO MADERO Y THAYS PARQUE LELOIR'
+    img: 'assets/img/d-reformer.webp',
+    alt: 'Práctica de pilates reformer frente a los ventanales del estudio',
+    copy: 'Para cuando buscás trabajar en profundidad, sumar resistencia y sentir el cuerpo más fuerte.',
+    sede: 'Puerto Madero y Thays Parque Leloir'
   },
   {
     id: 'mat',
     nombre: 'Pilates Mat',
     dur: '50 MIN',
-    img: 'assets/img/estudio-interior.webp',
-    alt: 'Sala principal del estudio preparada para la clase',
-    copy: 'Para días en los que querés conectar con tu cuerpo, activar el centro y moverte con control. Todo el trabajo sucede en el suelo, con tu propio peso.',
-    sede: 'PUERTO MADERO'
+    img: 'assets/img/d-mat.webp',
+    alt: 'Sala preparada para una clase de pilates mat',
+    copy: 'Para días en los que querés conectar con tu cuerpo, activar el centro y moverte con control.',
+    sede: 'Puerto Madero'
   },
   {
     id: 'vinyasa',
     nombre: 'Hatha Vinyasa',
     dur: '60 MIN',
-    img: 'assets/img/yoga-vinyasa.webp',
+    img: 'assets/img/d-vinyasa.webp',
     alt: 'Postura del guerrero en la sala de yoga',
-    copy: 'Fluidez, energía y dinamismo. Para elevar el ritmo y activar el cuerpo cuando necesitás intensidad, movimiento y liberar tensión.',
-    sede: 'PUERTO MADERO'
+    copy: 'Fluidez, energía y dinamismo. Para elevar el ritmo y liberar tensión.',
+    sede: 'Puerto Madero'
   },
   {
     id: 'restaurativo',
     nombre: 'Yoga Restaurativo',
     dur: '60 MIN',
-    img: 'assets/img/yoga-restaurativo.webp',
+    img: 'assets/img/d-restaurativo.webp',
     alt: 'Postura del niño durante una clase de yoga restaurativo',
-    copy: 'Calma, pausa y profundidad. Para soltar, respirar y volver al equilibrio. La práctica que elegís cuando el cuerpo pide bajar un cambio.',
-    sede: 'PUERTO MADERO'
+    copy: 'Calma, pausa y profundidad. Para soltar el cuerpo y volver al equilibrio.',
+    sede: 'Puerto Madero'
   },
   {
     id: 'barre',
     nombre: 'Puro Barre',
     dur: '60 MIN',
-    img: 'assets/img/barre-clase.webp',
-    alt: 'Trabajo en la barra durante una clase de Puro Barre',
-    copy: 'Bajo impacto, dinámico y consciente: lo mejor del pilates, la técnica de ballet y el trabajo funcional. Con barra, pesas livianas, bandas y pelotas para tonificar, ganar resistencia y equilibrio.',
-    sede: 'PUERTO MADERO · SALA JADE'
+    img: 'assets/img/d-barre.webp',
+    alt: 'Flor y Ara, instructoras de Puro Barre, en el estudio',
+    copy: 'Bajo impacto y consciente: lo mejor del pilates, la técnica de ballet y el trabajo funcional.',
+    sede: 'Puerto Madero · Sala Jade'
   }
 ];
 
@@ -71,7 +72,6 @@ function montarFacetas () {
   const copy   = $('#facetCopy');
   if (!lista || !figura || !copy) return;
 
-  // Botones + imágenes precargadas (el cambio tiene que ser instantáneo)
   FACETAS.forEach((f, i) => {
     const li = document.createElement('li');
     li.innerHTML = `
@@ -95,8 +95,8 @@ function montarFacetas () {
 
   const botones = $$('.facet-btn', lista);
   const pintar = (f) => {
-    $('h3', copy).textContent   = f.nombre;
-    $('p', copy).textContent    = f.copy;
+    $('h3', copy).textContent = f.nombre;
+    $('p', copy).textContent  = f.copy;
     $('.facets__where', copy).textContent = f.sede;
   };
   pintar(FACETAS[0]);
@@ -111,7 +111,7 @@ function montarFacetas () {
       img.classList.toggle('is-live', img.dataset.for === f.id));
 
     copy.classList.add('is-swapping');
-    setTimeout(() => { pintar(f); copy.classList.remove('is-swapping'); }, 180);
+    setTimeout(() => { pintar(f); copy.classList.remove('is-swapping'); }, calma ? 320 : 0);
 
     if (foco) botones[idx].focus();
   };
@@ -134,8 +134,6 @@ function montarFacetas () {
 /* -------------------------------------------------------------- horarios -- */
 
 const DIAS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-
-// [ profesora, nivel, prenatal? ]  ·  null = sin clase
 const G = (n, l, pre) => ({ n, l, pre: !!pre });
 
 const HORARIOS = {
@@ -157,9 +155,9 @@ const HORARIOS = {
     }, {
       titulo: 'Sala Jade: yoga y barre',
       filas: [
+        ['10:00', [null, null, null, null, null, G('Puro Barre','Flor y Ara')]],
         ['17:00', [null, G('Ashtanga Vinyasa Yoga',''), null, null, null, null]],
-        ['19:30', [G('Puro Barre','Flor y Ara'), null, G('Puro Barre','Flor y Ara'), null, null, null]],
-        ['10:00', [null, null, null, null, null, G('Puro Barre','Flor y Ara')]]
+        ['19:30', [G('Puro Barre','Flor y Ara'), null, G('Puro Barre','Flor y Ara'), null, null, null]]
       ]
     }]
   },
@@ -169,27 +167,26 @@ const HORARIOS = {
     tablas: [{
       titulo: 'Pilates',
       filas: [
-        ['8:00',  [G('Belu','Avanzado'), G('Dani','Stott'),       G('Romi','Inicial'), G('Belu','Avanzado'),       G('Dani','Stott'),       G('Romi','Inicial')]],
-        ['9:00',  [G('Belu','Avanzado'), G('Dani','Stott'),       G('Romi','Inicial'), G('Belu','Avanzado'),       G('Dani','Stott'),       G('Romi','Inicial')]],
-        ['10:00', [G('Belu','Avanzado'), G('Dani','Prenatal',1),  G('Romi','Inicial'), G('Belu','Avanzado'),       G('Dani','Stott'),       G('Romi','Inicial')]],
-        ['11:00', [G('Belu','Avanzado'), G('Dani','Stott'),       G('Romi','Inicial'), G('Belu','Avanzado'),       G('Dani','Prenatal',1),  G('Romi','Inicial')]],
-        ['12:00', [G('Belu','Avanzado'), G('Dani','Prenatal',1),  G('Romi','Inicial'), G('Belu','Avanzado'),       G('Dani','Stott'),       G('Romi','Inicial')]],
-        ['16:00', [G('Dani','Stott'),    G('Romi','Inicial'),     G('Belu','Avanzado'),G('Dani','Prenatal',1),     G('Romi','Inicial'),     null]],
-        ['17:00', [G('Dani','Stott'),    G('Romi','Inicial'),     G('Belu','Avanzado'),G('Dani','Stott'),          G('Romi','Inicial'),     null]],
-        ['18:00', [G('Dani','Stott'),    G('Romi','Inicial'),     G('Belu','Avanzado'),G('Dani','Stott'),          G('Romi','Inicial'),     null]],
-        ['19:00', [G('Dani','Stott'),    G('Romi','Inicial'),     G('Belu','Avanzado'),G('Dani','Stott'),          G('Romi','Inicial'),     null]]
+        ['8:00',  [G('Belu','Avanzado'), G('Dani','Stott'),      G('Romi','Inicial'), G('Belu','Avanzado'),   G('Dani','Stott'),      G('Romi','Inicial')]],
+        ['9:00',  [G('Belu','Avanzado'), G('Dani','Stott'),      G('Romi','Inicial'), G('Belu','Avanzado'),   G('Dani','Stott'),      G('Romi','Inicial')]],
+        ['10:00', [G('Belu','Avanzado'), G('Dani','Prenatal',1), G('Romi','Inicial'), G('Belu','Avanzado'),   G('Dani','Stott'),      G('Romi','Inicial')]],
+        ['11:00', [G('Belu','Avanzado'), G('Dani','Stott'),      G('Romi','Inicial'), G('Belu','Avanzado'),   G('Dani','Prenatal',1), G('Romi','Inicial')]],
+        ['12:00', [G('Belu','Avanzado'), G('Dani','Prenatal',1), G('Romi','Inicial'), G('Belu','Avanzado'),   G('Dani','Stott'),      G('Romi','Inicial')]],
+        ['16:00', [G('Dani','Stott'),    G('Romi','Inicial'),    G('Belu','Avanzado'),G('Dani','Prenatal',1), G('Romi','Inicial'),    null]],
+        ['17:00', [G('Dani','Stott'),    G('Romi','Inicial'),    G('Belu','Avanzado'),G('Dani','Stott'),      G('Romi','Inicial'),    null]],
+        ['18:00', [G('Dani','Stott'),    G('Romi','Inicial'),    G('Belu','Avanzado'),G('Dani','Stott'),      G('Romi','Inicial'),    null]],
+        ['19:00', [G('Dani','Stott'),    G('Romi','Inicial'),    G('Belu','Avanzado'),G('Dani','Stott'),      G('Romi','Inicial'),    null]]
       ]
     }]
   }
 };
 
 function montarHorarios () {
-  const tabs   = $('#schedTabs');
+  const tabs = $('#schedTabs');
   const paneles = $('#schedPanels');
   if (!tabs || !paneles) return;
 
   Object.entries(HORARIOS).forEach(([key, sede], i) => {
-    // Pestaña
     const b = document.createElement('button');
     b.className = 'sched__tab';
     b.type = 'button';
@@ -201,7 +198,6 @@ function montarHorarios () {
     b.textContent = sede.etiqueta;
     tabs.appendChild(b);
 
-    // Panel
     const p = document.createElement('div');
     p.className = 'sched__panel';
     p.id = `spanel-${key}`;
@@ -256,6 +252,37 @@ function montarHorarios () {
 }
 
 
+/* --------------------------------------------- apariciones al hacer scroll */
+/* Lentas y escalonadas: la página respira en vez de aparecer de golpe.       */
+
+function montarApariciones () {
+  const objetivos = $$('[data-reveal], [data-reveal-img], [data-reveal-group]');
+  if (!objetivos.length) return;
+
+  if (!('IntersectionObserver' in window) || !calma) {
+    objetivos.forEach(el => el.classList.add('is-in'));
+    return;
+  }
+
+  // escalona los hijos de cada grupo
+  $$('[data-reveal-group]').forEach(g => {
+    [...g.children].forEach((hijo, i) => {
+      hijo.style.transitionDelay = `${i * 110}ms`;
+    });
+  });
+
+  const obs = new IntersectionObserver((entradas) => {
+    entradas.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      obs.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+
+  objetivos.forEach(el => obs.observe(el));
+}
+
+
 /* ------------------------------------------------------------- WhatsApp --- */
 
 function enlazarWhatsApp () {
@@ -273,9 +300,10 @@ function enlazarWhatsApp () {
 /* ------------------------------------------------------------ navegación -- */
 
 function montarNav () {
-  const nav    = $('#nav');
+  const nav = $('#nav');
   const burger = $('#burger');
   const drawer = $('#drawer');
+  if (!nav || !burger || !drawer) return;
 
   const onScroll = () => nav.classList.toggle('is-stuck', window.scrollY > 24);
   onScroll();
@@ -289,8 +317,7 @@ function montarNav () {
   };
 
   burger.addEventListener('click', () => {
-    const abierto = burger.getAttribute('aria-expanded') === 'true';
-    if (abierto) return cerrar();
+    if (burger.getAttribute('aria-expanded') === 'true') return cerrar();
     burger.setAttribute('aria-expanded', 'true');
     burger.setAttribute('aria-label', 'Cerrar menú');
     drawer.classList.add('is-open');
@@ -306,19 +333,20 @@ function montarNav () {
 
 function montarTicker () {
   const track = $('#ticker');
-  if (!track) return;
-  track.innerHTML += track.innerHTML;   // duplicado → loop sin corte
+  if (track) track.innerHTML += track.innerHTML;
 }
 
 
 /* ------------------------------------------------------------------ init -- */
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.__esmeraldaOK = true;
   montarNav();
   montarTicker();
   montarFacetas();
   montarHorarios();
   enlazarWhatsApp();
+  montarApariciones();
   const y = $('#year');
   if (y) y.textContent = new Date().getFullYear();
 });
