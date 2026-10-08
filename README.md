@@ -68,6 +68,18 @@ círculo de la flecha, el ícono prenatal. Nunca como fondo de sección.
   "Hatha Vinyasa / Yoga Restaurativo" en el feed y "Vinyasa HIIT / Yoga
   Reconstructivo" en las membresías. En el sitio quedó el primero.
 
+## Caché
+
+`vercel.json` separa los tipos de asset a propósito:
+
+- **fuentes** → caché de un año (`immutable`): el nombre del archivo identifica
+  peso y estilo, nunca cambia de contenido.
+- **imágenes** → un día, con revalidación en segundo plano.
+- **CSS y JS** → siempre revalidar, porque los nombres no llevan hash.
+
+Si alguna vez cambiás `style.css` o `main.js` y no ves el cambio publicado,
+subile el número de versión en el `?v=` de `index.html`.
+
 ## Notas
 
 - Las fotos se recortaron de capturas de Instagram, por eso tienen la resolución
