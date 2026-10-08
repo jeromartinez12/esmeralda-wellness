@@ -148,9 +148,27 @@ setTimeout(function () {
 <!-- ======================================================= disciplinas == -->
 <section class="band band--prof" id="disciplinas">
   <div class="shell">
-    <div class="lede" data-reveal>
-      <h2 class="lede__title">Tu cuerpo no necesita lo mismo todos los días.</h2>
-      <p class="lede__body">Una misma piedra, varias caras. Deslizá y elegí con qué querés moverte hoy.</p>
+    <div class="encabezado" data-reveal>
+      <div class="encabezado__texto">
+        <h2 class="lede__title">Tu cuerpo no necesita lo mismo todos los días.</h2>
+        <p class="lede__body">Una misma piedra, varias caras. Deslizá y elegí con qué querés moverte hoy.</p>
+      </div>
+
+      <div class="mando">
+        <div class="carrusel__nav">
+          <button class="carrusel__btn" id="discPrev" type="button" aria-label="Disciplina anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+          </button>
+          <button class="carrusel__btn" id="discNext" type="button" aria-label="Disciplina siguiente">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+          </button>
+          <span class="carrusel__cuenta" id="discCuenta" aria-live="polite"></span>
+        </div>
+        <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero saber qué clase me conviene para empezar.">
+          <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+          Reservá tu lugar
+        </a>
+      </div>
     </div>
   </div>
 
@@ -158,30 +176,22 @@ setTimeout(function () {
     <ul class="carrusel__pista" id="discPista" tabindex="0"
         aria-label="Disciplinas, deslizá para ver todas"></ul>
   </div>
-
-  <div class="shell carrusel__pie" data-reveal>
-    <div class="carrusel__nav">
-      <button class="carrusel__btn" id="discPrev" type="button" aria-label="Disciplina anterior">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-      </button>
-      <button class="carrusel__btn" id="discNext" type="button" aria-label="Disciplina siguiente">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-      </button>
-      <span class="carrusel__cuenta" id="discCuenta" aria-live="polite"></span>
-    </div>
-    <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero saber qué clase me conviene para empezar.">
-      <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-      Reservá tu lugar
-    </a>
-  </div>
 </section>
 
 <!-- =========================================================== método == -->
 <section class="band band--crema" id="metodo">
   <div class="shell">
-    <div class="lede" data-reveal>
-      <h2 class="lede__title">Pilates, elevado a otro nivel.</h2>
-      <p class="lede__body">Tres equipos, infinitas posibilidades.</p>
+    <div class="encabezado" data-reveal>
+      <div class="encabezado__texto">
+        <h2 class="lede__title">Pilates, elevado a otro nivel.</h2>
+        <p class="lede__body">Tres equipos, infinitas posibilidades.</p>
+      </div>
+      <div class="mando">
+        <a class="cta cta--solid" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero probar una clase de pilates reformer.">
+          <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+          Probá una clase
+        </a>
+      </div>
     </div>
   </div>
 
@@ -204,21 +214,22 @@ setTimeout(function () {
         <p>Fuerza profunda y estabilidad con máxima precisión.</p>
       </li>
     </ul>
-
-    <div class="seccion__cta" data-reveal>
-      <a class="cta cta--solid" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero probar una clase de pilates reformer.">
-        <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-        Probá una clase
-      </a>
-    </div>
   </div>
 </section>
 
 <!-- ====================================================== necesidades == -->
 <section class="band shell" id="necesidades">
-  <div class="lede" data-reveal>
-    <h2 class="lede__title">¿Qué necesita hoy tu cuerpo?</h2>
-    <p class="lede__body">Escuchar las molestias es el primer paso.</p>
+  <div class="encabezado" data-reveal>
+    <div class="encabezado__texto">
+      <h2 class="lede__title">¿Qué necesita hoy tu cuerpo?</h2>
+      <p class="lede__body">Escuchar las molestias es el primer paso. Contanos qué te está pasando y te ubicamos en la clase adecuada.</p>
+    </div>
+    <div class="mando">
+      <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero contarles qué necesito y que me recomienden una clase.">
+        <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+        Escribinos
+      </a>
+    </div>
   </div>
 
   <div class="bento" data-reveal-group>
@@ -246,61 +257,65 @@ setTimeout(function () {
       <p>Respirá, relajá, recuperá el equilibrio entre mente y cuerpo.</p>
     </article>
   </div>
-
-  <div class="seccion__cta" data-reveal>
-    <p class="seccion__cta-nota">Contanos qué te está pasando y te ubicamos en la clase adecuada.</p>
-    <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero contarles qué necesito y que me recomienden una clase.">
-      <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-      Escribinos
-    </a>
-  </div>
 </section>
 
 <!-- =========================================================== sedes === -->
 <section class="band band--crema" id="sedes">
   <div class="shell">
-    <div class="lede" data-reveal>
-      <h2 class="lede__title">Dos sedes, un mismo cuidado.</h2>
-      <p class="lede__body">Puerto Madero suma spa y tratamientos. Thays Parque Leloir se dedica al pilates.</p>
+    <div class="encabezado" data-reveal>
+      <div class="encabezado__texto">
+        <h2 class="lede__title">Dos sedes, un mismo cuidado.</h2>
+        <p class="lede__body">Puerto Madero suma spa y tratamientos. Thays Parque Leloir se dedica al pilates. Elegí una para ver dónde queda.</p>
+      </div>
+      <div class="mando" role="tablist" aria-label="Sede">
+        <button class="pill" type="button" role="tab" id="sede-tab-madero"
+                aria-controls="sede-madero" aria-selected="true">Puerto Madero</button>
+        <button class="pill" type="button" role="tab" id="sede-tab-leloir"
+                aria-controls="sede-leloir" aria-selected="false">Thays Parque Leloir</button>
+      </div>
     </div>
 
-    <div class="sedes">
-      <article data-reveal>
-        <div class="sede__map" data-reveal-img>
+    <div class="sedes" data-reveal>
+      <article class="sede" id="sede-madero" role="tabpanel" aria-labelledby="sede-tab-madero">
+        <div class="sede__map">
           <img src="assets/img/sede-madero.webp" alt="Mapa de la sede Puerto Madero" loading="lazy" width="1400" height="1131">
         </div>
-        <h3 class="sede__name">Puerto Madero</h3>
-        <p class="sede__addr">Rosario Vera Peñaloza 585, CABA</p>
-        <ul class="sede__rows">
-          <li><span>Lunes a viernes</span><span>8:00 – 20:00</span></li>
-          <li><span>Sábados</span><span>8:00 – 13:00</span></li>
-        </ul>
-        <div class="sede__tags">
-          <span>Pilates</span><span>Yoga</span><span>Puro Barre</span><span>Prenatal</span><span>Spa</span>
+        <div class="sede__info">
+          <h3 class="sede__name">Puerto Madero</h3>
+          <p class="sede__addr">Rosario Vera Peñaloza 585, CABA</p>
+          <ul class="sede__rows">
+            <li><span>Lunes a viernes</span><span>8:00 – 20:00</span></li>
+            <li><span>Sábados</span><span>8:00 – 13:00</span></li>
+          </ul>
+          <div class="sede__tags">
+            <span>Pilates</span><span>Yoga</span><span>Puro Barre</span><span>Prenatal</span><span>Spa</span>
+          </div>
+          <a class="cta cta--solid sede__cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero consultar por clases en Puerto Madero.">
+            <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+            Escribinos
+          </a>
         </div>
-        <a class="cta cta--solid sede__cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero consultar por clases en Puerto Madero.">
-          <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-          Escribinos
-        </a>
       </article>
 
-      <article data-reveal>
-        <div class="sede__map" data-reveal-img>
+      <article class="sede" id="sede-leloir" role="tabpanel" aria-labelledby="sede-tab-leloir" hidden>
+        <div class="sede__map">
           <img src="assets/img/sede-leloir.webp" alt="Mapa de la sede Thays Parque Leloir" loading="lazy" width="1200" height="1502">
         </div>
-        <h3 class="sede__name">Thays Parque Leloir</h3>
-        <p class="sede__addr">Zona Martín Fierro, Parque Leloir</p>
-        <ul class="sede__rows">
-          <li><span>Lunes a viernes</span><span>8:00 – 20:00</span></li>
-          <li><span>Sábados</span><span>8:00 – 13:00</span></li>
-        </ul>
-        <div class="sede__tags">
-          <span>Pilates</span><span>Prenatal</span>
+        <div class="sede__info">
+          <h3 class="sede__name">Thays Parque Leloir</h3>
+          <p class="sede__addr">Zona Martín Fierro, Parque Leloir</p>
+          <ul class="sede__rows">
+            <li><span>Lunes a viernes</span><span>8:00 – 20:00</span></li>
+            <li><span>Sábados</span><span>8:00 – 13:00</span></li>
+          </ul>
+          <div class="sede__tags">
+            <span>Pilates</span><span>Prenatal</span>
+          </div>
+          <a class="cta cta--solid sede__cta" href="#contacto" data-wa="leloir" data-wa-msg="¡Hola! Quiero consultar por clases en Thays Parque Leloir.">
+            <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+            Escribinos
+          </a>
         </div>
-        <a class="cta cta--solid sede__cta" href="#contacto" data-wa="leloir" data-wa-msg="¡Hola! Quiero consultar por clases en Thays Parque Leloir.">
-          <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-          Escribinos
-        </a>
       </article>
     </div>
   </div>
@@ -308,9 +323,17 @@ setTimeout(function () {
 
 <!-- ======================================================== horarios === -->
 <section class="band shell" id="horarios">
-  <div class="lede" data-reveal>
-    <h2 class="lede__title">Horarios</h2>
-    <p class="lede__body">Encontrá tu lugar en la semana. Los turnos se coordinan por WhatsApp.</p>
+  <div class="encabezado" data-reveal>
+    <div class="encabezado__texto">
+      <h2 class="lede__title">Horarios</h2>
+      <p class="lede__body">Encontrá tu lugar en la semana. Los turnos se coordinan por WhatsApp.</p>
+    </div>
+    <div class="mando">
+      <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero coordinar un horario para empezar.">
+        <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+        Coordiná tu horario
+      </a>
+    </div>
   </div>
 
   <details class="sched" data-reveal>
@@ -329,36 +352,28 @@ setTimeout(function () {
       <p class="sched__note">Las clases de pilates duran 50 minutos.</p>
     </div>
   </details>
-
-  <div class="seccion__cta" data-reveal>
-    <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero coordinar un horario para empezar.">
-      <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-      Coordiná tu horario
-    </a>
-  </div>
 </section>
 
 <!-- ====================================================== membresías === -->
 <section class="band band--crema" id="membresias">
   <div class="shell">
-    <div class="lede" data-reveal>
-      <h2 class="lede__title">Wellness Memberships</h2>
-      <p class="lede__body">Elegí cómo organizar tu práctica cada semana, alternando entrenamiento, movilidad y pausa.</p>
-    </div>
+    <div class="memb">
+      <div class="memb__aside" data-reveal>
+        <h2 class="lede__title">Wellness Memberships</h2>
+        <p class="lede__body">Elegí cómo organizar tu práctica cada semana, alternando entrenamiento, movilidad y pausa.</p>
+        <p class="memb__incluye">Incluye Pilates Circuito Completo, Pilates Mat, Yoga Vinyasa HIIT y Yoga Restaurativo.</p>
+        <a class="cta cta--solid" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero consultar los valores de las membresías.">
+          <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+          Consultá los valores
+        </a>
+      </div>
 
-    <ul class="plans" data-reveal-group>
-      <li><b>04</b><span>clases al mes</span><p>Una por semana, para sostener el hábito.</p></li>
-      <li><b>08</b><span>clases al mes</span><p>Dos por semana: el cuerpo empieza a cambiar.</p></li>
-      <li><b>12</b><span>clases al mes</span><p>Tres por semana, con espacio para la pausa.</p></li>
-      <li><b>16</b><span>clases al mes</span><p>Cuatro por semana, práctica instalada.</p></li>
-    </ul>
-
-    <div class="plans__foot" data-reveal>
-      <a class="cta cta--solid" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero consultar los valores de las membresías.">
-        <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-        Consultá los valores
-      </a>
-      <p>Incluye Pilates Circuito Completo, Pilates Mat, Yoga Vinyasa HIIT y Yoga Restaurativo.</p>
+      <ul class="plans" data-reveal-group>
+        <li><b>04</b><span>clases al mes</span><p>Una por semana, para sostener el hábito.</p></li>
+        <li><b>08</b><span>clases al mes</span><p>Dos por semana: el cuerpo empieza a cambiar.</p></li>
+        <li><b>12</b><span>clases al mes</span><p>Tres por semana, con espacio para la pausa.</p></li>
+        <li><b>16</b><span>clases al mes</span><p>Cuatro por semana, práctica instalada.</p></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -385,57 +400,56 @@ setTimeout(function () {
 
 <!-- ============================================================== spa == -->
 <section class="band shell" id="spa">
-  <div class="lede" data-reveal>
-    <h2 class="lede__title">Spa</h2>
-    <p class="lede__body">Masajes, faciales y rituales. Solo en Puerto Madero.</p>
+  <div class="encabezado" data-reveal>
+    <div class="encabezado__texto">
+      <h2 class="lede__title">Spa</h2>
+      <p class="lede__body">Masajes, faciales y rituales. Solo en Puerto Madero.</p>
+    </div>
+    <div class="mando">
+      <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero reservar un tratamiento del spa en Puerto Madero.">
+        <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+        Reservá tu tratamiento
+      </a>
+    </div>
   </div>
 
-  <div class="spa">
-    <div class="spa__figure" data-reveal-img>
+  <div class="spa" data-reveal-group>
+    <figure class="spa__foto">
       <img src="assets/img/spa.webp" alt="Sala de masajes de Esmeralda Puerto Madero" loading="lazy" width="1400" height="1750">
-    </div>
+    </figure>
 
-    <div data-reveal-group>
-      <section class="spa__group">
-        <h3>Masajes <span>60 min</span></h3>
-        <ul>
-          <li>Ritual Lomi Lomi</li>
-          <li>Pindas Sagradas</li>
-          <li>Cañas de Bambú</li>
-          <li>Piedras Calientes</li>
-          <li>Desbloqueo Corporal</li>
-          <li>Full Body</li>
-          <li>Pure Detox <em>30 min</em></li>
-        </ul>
-      </section>
+    <section class="spa__card">
+      <h3>Masajes <span>60 min</span></h3>
+      <ul>
+        <li>Ritual Lomi Lomi</li>
+        <li>Pindas Sagradas</li>
+        <li>Cañas de Bambú</li>
+        <li>Piedras Calientes</li>
+        <li>Desbloqueo Corporal</li>
+        <li>Full Body</li>
+        <li>Pure Detox <em>30 min</em></li>
+      </ul>
+    </section>
 
-      <section class="spa__group">
-        <h3>Faciales</h3>
-        <ul>
-          <li>Initial Care</li>
-          <li>Dermaplaning &amp; Glow</li>
-          <li>Glow Therapy</li>
-        </ul>
-      </section>
+    <section class="spa__card">
+      <h3>Faciales</h3>
+      <ul>
+        <li>Initial Care</li>
+        <li>Dermaplaning &amp; Glow</li>
+        <li>Glow Therapy</li>
+      </ul>
+    </section>
 
-      <section class="spa__group">
-        <h3>Rituales <span>105 min</span></h3>
-        <p class="spa__note">Limpieza facial profunda combinada con un masaje.</p>
-        <ul>
-          <li>Renacer Hawaiano</li>
-          <li>Calma Total</li>
-          <li>Glow Bambú</li>
-          <li>Tierra &amp; Calma</li>
-        </ul>
-      </section>
-
-      <div class="seccion__cta seccion__cta--izq">
-        <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero reservar un tratamiento del spa en Puerto Madero.">
-          <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-          Reservá tu tratamiento
-        </a>
-      </div>
-    </div>
+    <section class="spa__card spa__card--ancha">
+      <h3>Rituales <span>105 min</span></h3>
+      <p class="spa__note">Limpieza facial profunda combinada con un masaje.</p>
+      <ul class="spa__lista--dos">
+        <li>Renacer Hawaiano</li>
+        <li>Calma Total</li>
+        <li>Glow Bambú</li>
+        <li>Tierra &amp; Calma</li>
+      </ul>
+    </section>
   </div>
 </section>
 
@@ -460,9 +474,17 @@ setTimeout(function () {
 <!-- ============================================================= faq === -->
 <section class="band band--crema" id="faq">
   <div class="shell">
-    <div class="lede" data-reveal>
-      <h2 class="lede__title">Antes de tu primera clase</h2>
-      <p class="lede__body">Para que llegues tranquila.</p>
+    <div class="encabezado" data-reveal>
+      <div class="encabezado__texto">
+        <h2 class="lede__title">Antes de tu primera clase</h2>
+        <p class="lede__body">Para que llegues tranquila. ¿Te queda alguna duda?</p>
+      </div>
+      <div class="mando">
+        <a class="cta cta--solid" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Tengo una consulta antes de reservar.">
+          <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+          Escribinos
+        </a>
+      </div>
     </div>
 
     <div class="faq" data-reveal>
@@ -486,14 +508,6 @@ setTimeout(function () {
         <summary>¿Cómo es la clase?</summary>
         <div class="faq__a">Grupos reducidos, celular en silencio y sin alimentos en la sala. Al terminar colaboramos entre todas con el orden de los elementos.</div>
       </details>
-    </div>
-
-    <div class="seccion__cta" data-reveal>
-      <p class="seccion__cta-nota">¿Te quedó alguna duda?</p>
-      <a class="cta cta--solid" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Tengo una consulta antes de reservar.">
-        <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
-        Escribinos
-      </a>
     </div>
   </div>
 </section>

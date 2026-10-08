@@ -138,6 +138,35 @@ function montarCarrusel () {
 }
 
 
+/* ----------------------------------------------------------------- sedes -- */
+/* Las dos pastillas del encabezado muestran una sede por vez con su mapa. */
+
+function montarSedes () {
+  const tabs = $$('[role="tab"][aria-controls^="sede-"]');
+  if (!tabs.length) return;
+
+  const mostrar = (idx, foco = true) => {
+    tabs.forEach((t, i) => {
+      const on = i === idx;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      const panel = $(`#${t.getAttribute('aria-controls')}`);
+      if (panel) panel.hidden = !on;
+    });
+    if (foco) tabs[idx].focus();
+  };
+
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => mostrar(i, false));
+    t.addEventListener('keydown', (e) => {
+      const map = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+      if (map[e.key]) { e.preventDefault(); mostrar((i + map[e.key] + tabs.length) % tabs.length); }
+    });
+  });
+  mostrar(0, false);
+}
+
+
 /* -------------------------------------------------------------- horarios -- */
 
 const DIAS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -366,6 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
   montarNav();
   montarTicker();
   montarCarrusel();
+  montarSedes();
   montarHorarios();
   enlazarWhatsApp();
   montarApariciones();
