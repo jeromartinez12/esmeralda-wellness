@@ -17,7 +17,7 @@
 <link rel="preload" href="assets/fonts/bodoni-moda-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/jost-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <script>
-/* Marca que hay JS para habilitar las apariciones. Si main.js no arranca,
+/* Marca que hay JS para habilitar las apariciones. Si app.js no arranca,
    se quita la clase a los 3s y todo el contenido queda visible igual. */
 document.documentElement.className += " js";
 setTimeout(function () {
@@ -58,24 +58,33 @@ setTimeout(function () {
     <a href="#spa">Spa</a>
   </nav>
 
-  <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero reservar una clase en Esmeralda.">
+  <a class="cta nav__cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero reservar una clase en Esmeralda.">
     <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
     Reservá tu lugar
   </a>
 
-  <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menú">
-    <span></span><span></span><span></span>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menú">
+    <span></span><span></span>
   </button>
 </header>
 
 <div class="drawer" id="drawer">
-  <a href="#disciplinas">Disciplinas</a>
-  <a href="#metodo">El método</a>
-  <a href="#sedes">Sedes</a>
-  <a href="#horarios">Horarios</a>
-  <a href="#membresias">Membresías</a>
-  <a href="#spa">Spa</a>
-  <a href="#faq">Preguntas</a>
+  <nav class="drawer__links" aria-label="Menú">
+    <a href="#disciplinas">Disciplinas</a>
+    <a href="#metodo">El método</a>
+    <a href="#sedes">Sedes</a>
+    <a href="#horarios">Horarios</a>
+    <a href="#membresias">Membresías</a>
+    <a href="#spa">Spa</a>
+    <a href="#faq">Preguntas</a>
+  </nav>
+  <div class="drawer__pie">
+    <a class="cta drawer__cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero reservar una clase en Esmeralda.">
+      <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+      Reservá tu lugar
+    </a>
+    <p class="drawer__nota">Puerto Madero · Thays Parque Leloir</p>
+  </div>
 </div>
 
 <main id="contenido">
@@ -103,11 +112,10 @@ setTimeout(function () {
     <h1 class="hero__claim">El lujo de <i>sentirse bien</i>.</h1>
     <p class="hero__sub">Pilates, yoga, barre y spa en Puerto Madero y Thays Parque Leloir.</p>
     <div class="hero__actions">
-      <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero reservar una clase en Puerto Madero.">
+      <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero reservar una clase en Esmeralda.">
         <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
         Reservá tu lugar
       </a>
-      <a class="cta cta--line" href="#disciplinas">Elegí tu forma de moverte</a>
     </div>
   </div>
 
@@ -142,21 +150,29 @@ setTimeout(function () {
   <div class="shell">
     <div class="lede" data-reveal>
       <h2 class="lede__title">Tu cuerpo no necesita lo mismo todos los días.</h2>
-      <p class="lede__body">Una misma piedra, varias caras. Elegí con qué querés moverte hoy.</p>
+      <p class="lede__body">Una misma piedra, varias caras. Deslizá y elegí con qué querés moverte hoy.</p>
     </div>
+  </div>
 
-    <div class="facets">
-      <ul class="facets__list" role="tablist" aria-label="Disciplinas" id="facetList" data-reveal></ul>
+  <div class="carrusel" data-reveal>
+    <ul class="carrusel__pista" id="discPista" tabindex="0"
+        aria-label="Disciplinas, deslizá para ver todas"></ul>
+  </div>
 
-      <div class="facets__stage" data-reveal>
-        <figure class="facets__figure" id="facetFig"></figure>
-        <div class="facets__copy" id="facetCopy">
-          <h3></h3>
-          <p></p>
-          <span class="facets__where"></span>
-        </div>
-      </div>
+  <div class="shell carrusel__pie" data-reveal>
+    <div class="carrusel__nav">
+      <button class="carrusel__btn" id="discPrev" type="button" aria-label="Disciplina anterior">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+      </button>
+      <button class="carrusel__btn" id="discNext" type="button" aria-label="Disciplina siguiente">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+      </button>
+      <span class="carrusel__cuenta" id="discCuenta" aria-live="polite"></span>
     </div>
+    <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero saber qué clase me conviene para empezar.">
+      <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+      Reservá tu lugar
+    </a>
   </div>
 </section>
 
@@ -167,63 +183,77 @@ setTimeout(function () {
       <h2 class="lede__title">Pilates, elevado a otro nivel.</h2>
       <p class="lede__body">Tres equipos, infinitas posibilidades.</p>
     </div>
+  </div>
 
-    <div class="method">
-      <ul class="method__kit" data-reveal-group>
-        <li>
-          <h3>Reformer</h3>
-          <p>Versatilidad, control y resistencia en cada movimiento.</p>
-        </li>
-        <li>
-          <h3>Tower</h3>
-          <p>Movimiento, elongación y control en equilibrio.</p>
-        </li>
-        <li>
-          <h3>Wunda Chair</h3>
-          <p>Fuerza profunda y estabilidad con máxima precisión.</p>
-        </li>
-      </ul>
+  <div class="metodo__banda" data-reveal-img>
+    <img src="assets/img/metodo.webp" alt="Reformers alineados bajo la luz cálida del estudio" loading="lazy" width="1500" height="975">
+  </div>
 
-      <div class="method__figure" data-reveal-img>
-        <img src="assets/img/metodo.webp" alt="Reformers alineados bajo la luz cálida del estudio" loading="lazy" width="1500" height="975">
-      </div>
+  <div class="shell">
+    <ul class="equipos" data-reveal-group>
+      <li>
+        <h3>Reformer</h3>
+        <p>Versatilidad, control y resistencia en cada movimiento.</p>
+      </li>
+      <li>
+        <h3>Tower</h3>
+        <p>Movimiento, elongación y control en equilibrio.</p>
+      </li>
+      <li>
+        <h3>Wunda Chair</h3>
+        <p>Fuerza profunda y estabilidad con máxima precisión.</p>
+      </li>
+    </ul>
+
+    <div class="seccion__cta" data-reveal>
+      <a class="cta cta--solid" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero probar una clase de pilates reformer.">
+        <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+        Probá una clase
+      </a>
     </div>
   </div>
 </section>
 
 <!-- ====================================================== necesidades == -->
-<section class="band shell">
+<section class="band shell" id="necesidades">
   <div class="lede" data-reveal>
     <h2 class="lede__title">¿Qué necesita hoy tu cuerpo?</h2>
     <p class="lede__body">Escuchar las molestias es el primer paso.</p>
   </div>
 
-  <ul class="needs" data-reveal-group>
-    <li>
+  <div class="bento" data-reveal-group>
+    <article class="bento__card bento__card--ancha">
       <h3>¿Dolor de espalda?</h3>
-      <p>Tonificá con movimientos precisos y guiados.</p>
-    </li>
-    <li>
+      <p>Tonificá con movimientos precisos y guiados que sostienen la columna.</p>
+    </article>
+
+    <article class="bento__card">
       <h3>¿Cansancio frecuente?</h3>
       <p>Mejorá circulación, postura y energía diaria.</p>
-    </li>
-    <li>
+    </article>
+
+    <figure class="bento__card bento__card--foto">
+      <img src="assets/img/respiro-aros.webp" alt="Aros de pilates sobre una repisa de madera" loading="lazy" width="1800" height="2253">
+    </figure>
+
+    <article class="bento__card">
       <h3>¿Rigidez o poca movilidad?</h3>
       <p>Ganá flexibilidad y coordinación.</p>
-    </li>
-    <li>
-      <h3>¿Estrés acumulado?</h3>
-      <p>Respirá, relajá, recuperá el equilibrio.</p>
-    </li>
-  </ul>
-</section>
+    </article>
 
-<!-- ======================================================== respiro 2 == -->
-<section class="respiro respiro--corto" aria-label="Detalle del estudio">
-  <div class="respiro__media" data-reveal-img>
-    <img src="assets/img/respiro-aros.webp" alt="Aros de pilates sobre una repisa de madera" loading="lazy" width="1800" height="2253">
+    <article class="bento__card">
+      <h3>¿Estrés acumulado?</h3>
+      <p>Respirá, relajá, recuperá el equilibrio entre mente y cuerpo.</p>
+    </article>
   </div>
-  <p class="respiro__line" data-reveal>Tu cuerpo sabe lo que necesita.</p>
+
+  <div class="seccion__cta" data-reveal>
+    <p class="seccion__cta-nota">Contanos qué te está pasando y te ubicamos en la clase adecuada.</p>
+    <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero contarles qué necesito y que me recomienden una clase.">
+      <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+      Escribinos
+    </a>
+  </div>
 </section>
 
 <!-- =========================================================== sedes === -->
@@ -299,6 +329,13 @@ setTimeout(function () {
       <p class="sched__note">Las clases de pilates duran 50 minutos.</p>
     </div>
   </details>
+
+  <div class="seccion__cta" data-reveal>
+    <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero coordinar un horario para empezar.">
+      <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+      Coordiná tu horario
+    </a>
+  </div>
 </section>
 
 <!-- ====================================================== membresías === -->
@@ -391,6 +428,13 @@ setTimeout(function () {
           <li>Tierra &amp; Calma</li>
         </ul>
       </section>
+
+      <div class="seccion__cta seccion__cta--izq">
+        <a class="cta" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Quiero reservar un tratamiento del spa en Puerto Madero.">
+          <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+          Reservá tu tratamiento
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -442,6 +486,14 @@ setTimeout(function () {
         <summary>¿Cómo es la clase?</summary>
         <div class="faq__a">Grupos reducidos, celular en silencio y sin alimentos en la sala. Al terminar colaboramos entre todas con el orden de los elementos.</div>
       </details>
+    </div>
+
+    <div class="seccion__cta" data-reveal>
+      <p class="seccion__cta-nota">¿Te quedó alguna duda?</p>
+      <a class="cta cta--solid" href="#contacto" data-wa="madero" data-wa-msg="¡Hola! Tengo una consulta antes de reservar.">
+        <svg class="cta__wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+        Escribinos
+      </a>
     </div>
   </div>
 </section>

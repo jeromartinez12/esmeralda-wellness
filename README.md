@@ -34,7 +34,7 @@ vercel.json                   cache de assets y URLs limpias
 | Qué | Dónde |
 |---|---|
 | Números de WhatsApp | `app.js` → `SEDES` |
-| Disciplinas del selector | `app.js` → `FACETAS` |
+| Disciplinas del carrusel | `app.js` → `FACETAS` |
 | Grillas de horarios | `app.js` → `HORARIOS` |
 | Textos, servicios de spa, FAQ, sedes | `index.html` |
 | Colores y tipografía | `app.css` → `:root` |

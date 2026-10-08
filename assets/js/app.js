@@ -66,68 +66,75 @@ const FACETAS = [
   }
 ];
 
-function montarFacetas () {
-  const lista  = $('#facetList');
-  const figura = $('#facetFig');
-  const copy   = $('#facetCopy');
-  if (!lista || !figura || !copy) return;
+/* Carrusel horizontal: cada tarjeta es 1:1 y lleva su propia imagen, nombre y
+   copy, así el cambio se ve siempre, también en teléfono.                     */
 
-  FACETAS.forEach((f, i) => {
-    const li = document.createElement('li');
-    li.innerHTML = `
-      <button class="facet-btn" role="tab" id="tab-${f.id}"
-              aria-selected="${i === 0}" aria-controls="facetFig"
-              tabindex="${i === 0 ? 0 : -1}">
-        <span class="facet-btn__edge"></span>
-        <span class="facet-btn__name">${f.nombre}</span>
-        <span class="facet-btn__meta">${f.dur}</span>
-      </button>`;
-    lista.appendChild(li);
+function montarCarrusel () {
+  const pista  = $('#discPista');
+  const prev   = $('#discPrev');
+  const next   = $('#discNext');
+  const cuenta = $('#discCuenta');
+  if (!pista) return;
 
-    const img = document.createElement('img');
-    img.src = f.img;
-    img.alt = f.alt;
-    img.loading = i === 0 ? 'eager' : 'lazy';
-    img.dataset.for = f.id;
-    if (i === 0) img.classList.add('is-live');
-    figura.appendChild(img);
-  });
+  pista.innerHTML = FACETAS.map((f, i) => `
+    <li class="disc">
+      <div class="disc__figure">
+        <img src="${f.img}" alt="${f.alt}" loading="${i < 2 ? 'eager' : 'lazy'}">
+        <span class="disc__dur">${f.dur}</span>
+      </div>
+      <div class="disc__body">
+        <h3 class="disc__name">${f.nombre}</h3>
+        <p class="disc__copy">${f.copy}</p>
+        <span class="disc__where">${f.sede}</span>
+      </div>
+    </li>`).join('');
 
-  const botones = $$('.facet-btn', lista);
-  const pintar = (f) => {
-    $('h3', copy).textContent = f.nombre;
-    $('p', copy).textContent  = f.copy;
-    $('.facets__where', copy).textContent = f.sede;
-  };
-  pintar(FACETAS[0]);
+  const tarjetas = $$('.disc', pista);
+  if (!tarjetas.length) return;
 
-  const elegir = (idx, foco = true) => {
-    const f = FACETAS[idx];
-    botones.forEach((b, i) => {
-      b.setAttribute('aria-selected', i === idx);
-      b.tabIndex = i === idx ? 0 : -1;
+  const indiceActual = () => {
+    const x = pista.scrollLeft;
+    let mejor = 0, dif = Infinity;
+    tarjetas.forEach((t, i) => {
+      const d = Math.abs(t.offsetLeft - pista.offsetLeft - x);
+      if (d < dif) { dif = d; mejor = i; }
     });
-    $$('img', figura).forEach(img =>
-      img.classList.toggle('is-live', img.dataset.for === f.id));
-
-    copy.classList.add('is-swapping');
-    setTimeout(() => { pintar(f); copy.classList.remove('is-swapping'); }, calma ? 320 : 0);
-
-    if (foco) botones[idx].focus();
+    return mejor;
   };
 
-  botones.forEach((b, i) => {
-    b.addEventListener('click', () => elegir(i, false));
-    b.addEventListener('keydown', (e) => {
-      const map = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
-      if (map[e.key]) {
-        e.preventDefault();
-        elegir((i + map[e.key] + botones.length) % botones.length);
-      }
-      if (e.key === 'Home') { e.preventDefault(); elegir(0); }
-      if (e.key === 'End')  { e.preventDefault(); elegir(botones.length - 1); }
+  const irA = (i) => {
+    const idx = Math.max(0, Math.min(tarjetas.length - 1, i));
+    pista.scrollTo({
+      left: tarjetas[idx].offsetLeft - pista.offsetLeft,
+      behavior: calma ? 'smooth' : 'auto'
     });
+  };
+
+  const refrescar = () => {
+    const i = indiceActual();
+    if (cuenta) cuenta.textContent = `${String(i + 1).padStart(2, '0')} / ${String(tarjetas.length).padStart(2, '0')}`;
+    const fin = pista.scrollLeft + pista.clientWidth >= pista.scrollWidth - 4;
+    if (prev) prev.disabled = pista.scrollLeft <= 4;
+    if (next) next.disabled = fin;
+  };
+
+  if (prev) prev.addEventListener('click', () => irA(indiceActual() - 1));
+  if (next) next.addEventListener('click', () => irA(indiceActual() + 1));
+
+  pista.addEventListener('keydown', (e) => {
+    const map = { ArrowRight: 1, ArrowLeft: -1 };
+    if (map[e.key]) { e.preventDefault(); irA(indiceActual() + map[e.key]); }
+    if (e.key === 'Home') { e.preventDefault(); irA(0); }
+    if (e.key === 'End')  { e.preventDefault(); irA(tarjetas.length - 1); }
   });
+
+  let t = null;
+  pista.addEventListener('scroll', () => {
+    clearTimeout(t);
+    t = setTimeout(refrescar, 90);
+  }, { passive: true });
+  addEventListener('resize', refrescar);
+  refrescar();
 }
 
 
@@ -271,20 +278,30 @@ function montarApariciones () {
     });
   });
 
+  // Entran y salen: al salir del viewport vuelven al reposo, y se marca si
+  // quedaron arriba o abajo para que el gesto siga la dirección del scroll.
   const obs = new IntersectionObserver((entradas) => {
     entradas.forEach(e => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('is-in');
-      obs.unobserve(e.target);
+      if (e.isIntersecting) {
+        e.target.classList.remove('is-up');
+        e.target.classList.add('is-in');
+      } else {
+        e.target.classList.remove('is-in');
+        e.target.classList.toggle('is-up', e.boundingClientRect.top < 0);
+      }
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
+  }, { rootMargin: '-6% 0px -10% 0px', threshold: 0 });
 
-  objetivos.forEach(el => {
-    // Si ya quedó por encima del viewport (llegada por ancla, recarga a media
-    // página), se muestra sin animar: nunca debe quedar contenido invisible.
-    if (el.getBoundingClientRect().bottom < 0) { el.classList.add('is-in'); return; }
-    obs.observe(el);
-  });
+  objetivos.forEach(el => obs.observe(el));
+
+  // Red de seguridad: si por cualquier motivo el observer no corriera, a los
+  // 2,5 s todo queda visible. Nunca debe quedar contenido invisible.
+  setTimeout(() => {
+    objetivos.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < innerHeight && r.bottom > 0) el.classList.add('is-in');
+    });
+  }, 2500);
 }
 
 
@@ -348,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.__esmeraldaOK = true;
   montarNav();
   montarTicker();
-  montarFacetas();
+  montarCarrusel();
   montarHorarios();
   enlazarWhatsApp();
   montarApariciones();
